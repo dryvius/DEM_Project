@@ -1,0 +1,30 @@
+services:
+  terrain-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: shaanxi-terrain-server:latest
+    container_name: shaanxi-terrain-server
+    ports:
+      - "${TERRAIN_PORT:-8080}:8080"
+    environment:
+      PORT: 8080
+      HOST: 0.0.0.0
+      TERRAIN_CACHE_CONTROL: "public, max-age=31536000, immutable"
+      MBTILES_PATH: /data/terrain.mbtiles
+    volumes:
+      # 默认挂载本地已构建的 MBTiles；可通过 MBTILES_HOST_PATH 指向其他路径
+      - ${MBTILES_HOST_PATH:-./buildTerrainFiles/terrain.mbtiles}:/data/terrain.mbtiles:ro
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:8080/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

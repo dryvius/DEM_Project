@@ -1,0 +1,22 @@
+# 依赖
+**/node_modules/
+
+# 构建产物
+**/dist/
+
+# 环境变量（含密钥）
+**/.env
+**/.env.local
+
+# 原始 SRTM 高程数据
+terrainSrtmImgs/
+
+# 地形构建产物（体积过大，勿提交 GitHub）
+terrainServer/buildTerrainFiles/*.tif
+terrainServer/buildTerrainFiles/*.mbtiles
+terrainServer/buildTerrainFiles/*.vrt
+
+# 编辑器
+.vscode/
+.idea/
+.DS_Store

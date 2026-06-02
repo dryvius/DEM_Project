@@ -1,0 +1,14 @@
+# 可选：与 terrain-server 同栈启动 Nginx，对外统一暴露 /terrain 并开启瓦片缓存。
+# 用法：docker compose -f docker-compose.yml -f docker-compose.nginx.yml up -d
+services:
+  terrain-nginx:
+    image: nginx:1.27-alpine
+    container_name: shaanxi-terrain-nginx
+    depends_on:
+      terrain-server:
+        condition: service_healthy
+    ports:
+      - "${TERRAIN_NGINX_PORT:-8081}:80"
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped

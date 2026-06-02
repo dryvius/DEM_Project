@@ -1,0 +1,16 @@
+{
+  "name": "shaanxi-terrain-tiles",
+  "version": "1.0.0",
+  "description": "陕西省 GEM 高程 Terrain-RGB MBTiles 本地瓦片服务（思极地图）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "powershell -ExecutionPolicy Bypass -File ./build.ps1"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  }
+}
