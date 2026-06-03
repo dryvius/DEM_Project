@@ -9,7 +9,7 @@
 **/.env.local
 
 # 原始 SRTM 高程数据
-terrainSrtmImgs/
+terrainSrtmImgs/*.img
 
 # 地形构建产物（体积过大，勿提交 GitHub）
 terrainServer/buildTerrainFiles/*.tif
